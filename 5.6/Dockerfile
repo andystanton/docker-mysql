@@ -32,10 +32,9 @@ RUN { \
 # comment out a few problematic configuration values
 RUN sed -Ei 's/^(bind-address|log)/#&/' /etc/mysql/my.cnf
 
-VOLUME /var/lib/mysql
 
-COPY docker-entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+COPY install-db.sh /install-db.sh
+RUN	/install-db.sh
 
 EXPOSE 3306
 CMD ["mysqld"]
